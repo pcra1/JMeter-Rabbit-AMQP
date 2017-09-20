@@ -40,6 +40,7 @@ public class AMQPPublisher extends AMQPSampler implements Interruptible {
     private final static String REPLY_TO_QUEUE = "AMQPPublisher.ReplyToQueue";
     private final static String CONTENT_TYPE = "AMQPPublisher.ContentType";
     private final static String CORRELATION_ID = "AMQPPublisher.CorrelationId";
+    private final static String APP_ID = "AMQPPublisher.AppId";
     private final static String MESSAGE_ID = "AMQPPublisher.MessageId";
     private final static String HEADERS = "AMQPPublisher.Headers";
 
@@ -191,6 +192,15 @@ public class AMQPPublisher extends AMQPSampler implements Interruptible {
         setProperty(CORRELATION_ID, content);
     }
 
+    public String getAppId() {
+        return getPropertyAsString(APP_ID);
+    }
+    
+    public void setAppId(String appId)
+    {
+    	setProperty(APP_ID, appId);
+    }
+    
     /**
      * @return the message id for the sample
      */
@@ -249,6 +259,7 @@ public class AMQPPublisher extends AMQPSampler implements Interruptible {
         final String contentType = StringUtils.defaultIfEmpty(getContentType(), "text/plain");
         
         builder.contentType(contentType)
+        	.appId(getAppId())
             .deliveryMode(deliveryMode)
             .priority(0)
             .correlationId(getCorrelationId())

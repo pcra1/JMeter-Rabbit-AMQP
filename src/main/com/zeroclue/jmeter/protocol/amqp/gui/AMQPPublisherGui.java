@@ -40,6 +40,7 @@ public class AMQPPublisherGui extends AMQPSamplerGui {
     private JLabeledTextField correlationId = new JLabeledTextField("Correlation Id");
     private JLabeledTextField contentType = new JLabeledTextField("ContentType");
     private JLabeledTextField messageId = new JLabeledTextField("Message Id");
+    private JLabeledTextField appId = new JLabeledTextField("App Id");
 
     private JCheckBox persistent = new JCheckBox("Persistent?", AMQPPublisher.DEFAULT_PERSISTENT);
     private JCheckBox useTx = new JCheckBox("Use Transactions?", AMQPPublisher.DEFAULT_USE_TX);
@@ -82,6 +83,7 @@ public class AMQPPublisherGui extends AMQPSamplerGui {
         correlationId.setText(sampler.getCorrelationId());
         messageId.setText(sampler.getMessageId());
         message.setText(sampler.getMessage());
+        appId.setText(sampler.getAppId());
         configureHeaders(sampler);
     }
 
@@ -116,6 +118,7 @@ public class AMQPPublisherGui extends AMQPSamplerGui {
         sampler.setCorrelationId(correlationId.getText());
         sampler.setContentType(contentType.getText());
         sampler.setMessageId(messageId.getText());
+        sampler.setAppId(appId.getText());
         sampler.setHeaders((Arguments) headers.createTestElement());
     }
 
@@ -148,6 +151,7 @@ public class AMQPPublisherGui extends AMQPSamplerGui {
         mainPanel.add(correlationId);
         mainPanel.add(contentType);
         mainPanel.add(messageId);
+        mainPanel.add(appId);
         mainPanel.add(headers);
         mainPanel.add(message);
     }
@@ -168,6 +172,7 @@ public class AMQPPublisherGui extends AMQPSamplerGui {
         messageId.setText("");
         headers.clearGui();
         message.setText("");
+        appId.setText("");
     }
 
     private void configureHeaders(AMQPPublisher sampler)
